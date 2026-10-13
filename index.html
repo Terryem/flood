@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#f4f6f1">
+	<title>National Flood Situation | Emergency Management</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
+	<script src="state-data.js" defer></script>
+	<link rel="stylesheet" href="bootstrap.css">
+	<script src="bootstrap.js" defer></script>
+</head>
+<body>
+	<main class="dashboard-shell">
+		<header class="topbar">
+			<a class="agency-lockup" href="#top" aria-label="National Emergency Management Agency dashboard home">
+				<span class="agency-mark" aria-hidden="true"><span>F</span><i></i></span>
+				<span class="agency-name">Flood <small>EMERGENCY OPERATIONS</small></span>
+			</a>
+			<div class="report-title">
+				<p class="eyebrow">Situation room <span class="live-dot"></span> sample report</p>
+				<h1>National flood dashboard</h1>
+				<p class="report-subtitle">Impact, displacement and response priorities across Nigeria</p>
+			</div>
+			<div class="report-meta">
+				<span class="meta-label">REPORT UPDATED</span>
+				<strong>29 Aug 2025 <span>·</span> 01:55 PM</strong>
+				<span class="sample-tag">ILLUSTRATIVE DATA</span>
+			</div>
+		</header>
+
+		<section class="filterbar" aria-label="Dashboard filters">
+			<div class="filter-intro"><span class="filter-glyph" aria-hidden="true">≡</span><span>Explore report</span></div>
+			<label class="filter-control">Reporting period
+				<select id="period-filter" aria-label="Reporting period">
+					<option value="season">2025 season</option><option value="august">August 2025</option><option value="july">July 2025</option>
+				</select>
+			</label>
+			<label class="filter-control">State
+				<select id="state-filter" aria-label="Filter by state"><option value="all">All states</option></select>
+			</label>
+			<a class="state-details-link" id="state-details-link" hidden>Open state brief ↗</a>
+			<label class="filter-control">LGA
+				<select id="lga-filter" aria-label="Filter by local government area"><option value="all">All LGAs</option><option value="maiduguri">Maiduguri</option><option value="bama">Bama</option><option value="gashua">Gashua</option></select>
+			</label>
+			<button class="reset-button" id="reset-filters" type="button"><span aria-hidden="true">↺</span> Reset filters</button>
+		</section>
+
+		<section class="headline-metrics" aria-label="Headline impact figures">
+			<article class="headline-metric"><span class="metric-icon people-icon" aria-hidden="true">◎</span><div><span class="metric-label">People affected</span><strong id="metric-affected">272,890</strong><span class="metric-note"><b>↑ 12%</b> vs. previous period</span></div></article>
+			<article class="headline-metric"><span class="metric-icon homes-icon" aria-hidden="true">⌂</span><div><span class="metric-label">States affected</span><strong id="metric-states">27 <small>/ 36</small></strong><span class="metric-note">Plus FCT · across 164 LGAs</span></div></article>
+			<article class="headline-metric"><span class="metric-icon displaced-icon" aria-hidden="true">↗</span><div><span class="metric-label">People displaced</span><strong id="metric-displaced">108,117</strong><span class="metric-note"><b class="warning">14</b> active displacement sites</span></div></article>
+			<article class="headline-metric"><span class="metric-icon fatalities-icon" aria-hidden="true">+</span><div><span class="metric-label">Lives lost</span><strong id="metric-fatalities">230</strong><span class="metric-note">Reported this season</span></div></article>
+		</section>
+
+		<section class="primary-grid" aria-label="Flood situation overview">
+			<article class="panel impact-panel">
+				<div class="panel-heading"><div><span class="section-kicker">01 / IMPACT</span><h2>Key figures</h2></div><span class="heading-aside">NATIONAL TOTAL</span></div>
+				<div class="impact-list" id="impact-list">
+					<div class="impact-row"><span class="impact-symbol">♙</span><span class="impact-copy"><strong>51,463</strong><small>Men affected</small></span><span class="impact-symbol">♙</span><span class="impact-copy"><strong>84,364</strong><small>Women affected</small></span></div>
+					<div class="impact-row"><span class="impact-symbol">⌁</span><span class="impact-copy"><strong>126,905</strong><small>Children affected</small></span><span class="impact-symbol">♧</span><span class="impact-copy"><strong>10,158</strong><small>Older people</small></span></div>
+					<div class="impact-row"><span class="impact-symbol">⌂</span><span class="impact-copy"><strong>37,958</strong><small>Houses affected</small></span><span class="impact-symbol">✚</span><span class="impact-copy"><strong>565</strong><small>Injuries sustained</small></span></div>
+					<div class="impact-row"><span class="impact-symbol">▤</span><span class="impact-copy"><strong>45,562</strong><small>Farmland affected</small></span><span class="impact-symbol">◉</span><span class="impact-copy"><strong>2,173</strong><small>People with disabilities</small></span></div>
+					<div class="impact-row"><span class="impact-symbol">⌁</span><span class="impact-copy"><strong>14,082</strong><small>Missing persons</small></span><span class="impact-symbol">◌</span><span class="impact-copy"><strong>230</strong><small>Deaths reported</small></span></div>
+				</div>
+				<div class="impact-foot"><span class="foot-dot"></span> Figures consolidated from state situation reports</div>
+			</article>
+
+			<article class="panel map-panel">
+				<div class="panel-heading"><div><span class="section-kicker">02 / GEOGRAPHY</span><h2>Flood impact by state</h2></div><button class="icon-button" id="map-reset" type="button" aria-label="Show all states" title="Show all states">⌖</button></div>
+				<div class="map-legend"><span class="legend-dot legend-high"></span> High impact <span class="legend-dot legend-mid"></span> Moderate <span class="legend-dot legend-low"></span> Lower <span class="legend-dot legend-none"></span> No report</div>
+				<div class="map-stage">
+					<div id="flood-map" role="application" aria-label="Interactive map of Nigerian state flood reports"><p class="map-loading">Loading Nigeria state boundaries…</p></div>
+				</div>
+				<div class="map-footer"><span><strong>27</strong> states + FCT reporting</span><span>Boundaries: geoBoundaries CC BY 4.0 · Map tiles: © OpenStreetMap</span></div>
+			</article>
+
+			<article class="panel challenge-panel">
+				<div class="panel-heading"><div><span class="section-kicker">03 / RESPONSE</span><h2>Response constraints</h2></div><button class="more-button" type="button" aria-label="More response details">•••</button></div>
+				<div class="donut-wrap">
+					<svg class="donut-chart" viewBox="0 0 220 220" role="img" aria-label="Response constraint breakdown: resource shortage 72 percent, access 16 percent, resistance 7 percent, security risk 5 percent">
+						<circle class="donut-track" cx="110" cy="110" r="78"/>
+						<circle class="donut-segment segment-shortage" cx="110" cy="110" r="78"/>
+						<circle class="donut-segment segment-access" cx="110" cy="110" r="78"/>
+						<circle class="donut-segment segment-resistance" cx="110" cy="110" r="78"/>
+						<circle class="donut-segment segment-security" cx="110" cy="110" r="78"/>
+					</svg>
+					<div class="donut-center"><strong>72<span>%</span></strong><small>resource<br>shortage</small></div>
+					<span class="donut-label label-access">Access <b>16%</b></span><span class="donut-label label-security">Security risk <b>5%</b></span><span class="donut-label label-resistance">Community resistance <b>7%</b></span>
+				</div>
+				<div class="challenge-key"><span><i class="key-green"></i>Resource shortage <b>72%</b></span><span><i class="key-blue"></i>Inaccessibility <b>16%</b></span><span><i class="key-violet"></i>Community resistance <b>7%</b></span><span><i class="key-red"></i>Security risk <b>5%</b></span></div>
+				<div class="response-note"><span class="response-pulse"></span><p><strong>Operational note</strong>Road access remains restricted in several riverine LGAs.</p></div>
+			</article>
+		</section>
+
+		<section class="analytics-grid" aria-label="Displacement trends and response needs">
+			<article class="panel chart-panel displacement-panel">
+				<div class="panel-heading"><div><span class="section-kicker">04 / DISPLACEMENT</span><h2>Affected vs. displaced</h2></div><div class="chart-legend"><span><i class="legend-affected"></i>Affected</span><span><i class="legend-displaced"></i>Displaced</span></div></div>
+				<div class="bar-chart" id="regional-chart" role="img" aria-label="Affected and displaced population by region"></div>
+			</article>
+			<article class="panel chart-panel trend-panel">
+				<div class="panel-heading"><div><span class="section-kicker">05 / TREND</span><h2>People affected by month</h2></div><span class="trend-total">272.9k <small>total</small></span></div>
+				<div class="line-chart" id="trend-chart" role="img" aria-label="Monthly affected population trend from January through August 2025"></div>
+				<div class="trend-insight"><span>↗</span> <strong>August</strong> recorded the highest monthly impact</div>
+			</article>
+			<article class="panel chart-panel needs-panel">
+				<div class="panel-heading"><div><span class="section-kicker">06 / RESPONSE PRIORITIES</span><h2>Priority needs</h2></div><span class="needs-unit">REQUEST VOLUME</span></div>
+				<div class="needs-chart" id="needs-chart" role="list" aria-label="Priority response needs"></div>
+				<div class="needs-foot"><span>Highest demand</span><strong>Food &amp; emergency shelter</strong></div>
+			</article>
+		</section>
+
+		<footer class="dashboard-footer"><span><strong>NEMA</strong> · National Emergency Management Agency</span><span>Illustrative dashboard template · Data shown for demonstration only</span><a href="#top">Back to top ↑</a></footer>
+	</main>
+</body>
+</html>

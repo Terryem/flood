@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#f1f4ef">
+	<title>State Flood Brief | NEMA Situation Room</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+	<link rel="stylesheet" href="state.css">
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
+	<script src="../state-data.js" defer></script>
+	<script src="state-detail.js" defer></script>
+</head>
+<body class="detail-page">
+	<main class="detail-shell">
+		<header class="detail-topbar">
+			<a class="brand" href="../index.html"><span class="brand-mark">F</span><span>Flood <small>FLOOD SITUATION ROOM</small></span></a>
+			<div class="top-actions"><label for="state-picker">STATE BRIEF</label><select id="state-picker" aria-label="Choose a state"></select><a class="back-link" href="../index.html">← National dashboard</a></div>
+		</header>
+
+		<div class="sample-warning" role="note"><span aria-hidden="true">!</span><p><strong>DEMONSTRATION ONLY</strong> This page uses illustrative impact values and a simulated risk outlook, not official observations or a validated forecast. Connect NiMet rainfall forecasts, NHSA river gauges and verified state reports before operational use.</p></div>
+
+		<section class="state-heading">
+			<div><p class="eyebrow">STATE SITUATION BRIEF <span id="state-region">NIGERIA</span></p><h1 id="state-name">Loading state…</h1><p class="state-basin"><span class="basin-mark" aria-hidden="true">⌁</span><span id="basin-name">Flood basin profile</span></p></div>
+			<div class="risk-summary" id="risk-summary"><span class="risk-kicker">SAMPLE FLOOD RISK INDEX</span><strong id="risk-index">—</strong><span id="risk-band">Loading outlook</span></div>
+		</section>
+
+		<section class="state-stats" aria-label="State summary figures">
+			<article><span class="stat-label">Reported people affected</span><strong id="affected-total">—</strong><small id="affected-note">Illustrative dashboard value</small></article>
+			<article><span class="stat-label">Sample risk outlook</span><strong id="risk-label-stat">—</strong><small>Seven-day scenario index</small></article>
+			<article><span class="stat-label">Primary catchment</span><strong class="basin-stat" id="basin-stat">—</strong><small>Geographic monitoring context</small></article>
+			<article><span class="stat-label">Reporting coverage</span><strong id="report-status">—</strong><small>State report availability</small></article>
+		</section>
+
+		<section class="detail-grid">
+			<article class="detail-panel map-card">
+				<div class="panel-heading"><div><span class="section-label">GEOGRAPHY / CATCHMENT</span><h2>State location</h2></div><span class="map-key"><i></i>Selected state</span></div>
+				<div id="state-map" role="img" aria-label="Map showing selected Nigerian state"></div>
+				<p class="map-attribution">State boundaries: geoBoundaries CC BY 4.0 · Map tiles: © OpenStreetMap</p>
+			</article>
+
+			<article class="detail-panel outlook-card">
+				<div class="panel-heading"><div><span class="section-label">NEXT 7 DAYS / SIMULATED</span><h2>Flood risk outlook</h2></div><span class="scenario-tag">SAMPLE SCENARIO</span></div>
+				<div class="outlook-chart" id="outlook-chart" role="img" aria-label="Illustrative seven-day flood risk index"></div>
+				<div class="outlook-footer"><span><i class="risk-dot"></i> Relative flood risk index</span><span>Not a weather forecast</span></div>
+				<div class="forecast-note" id="forecast-note"></div>
+			</article>
+
+			<article class="detail-panel drivers-card">
+				<div class="panel-heading"><div><span class="section-label">LOCAL CONTEXT</span><h2>What to monitor</h2></div><span class="context-icon" aria-hidden="true">⌖</span></div>
+				<p class="drivers-intro">Use this catchment profile to guide local monitoring. It does not confirm current flooding.</p>
+				<ul class="driver-list" id="driver-list"></ul>
+				<div class="monitoring-strip"><span class="monitoring-dot"></span><span><strong>Monitoring priority</strong><small id="monitoring-priority">Check official river and rainfall updates</small></span></div>
+			</article>
+
+			<article class="detail-panel readiness-card">
+				<div class="panel-heading"><div><span class="section-label">RESPONSE / READINESS</span><h2>Preparedness checklist</h2></div></div>
+				<div class="readiness-list" id="readiness-list"></div>
+				<p class="readiness-note">Follow advisories from NEMA, NiMet, NHSA and your State Emergency Management Agency.</p>
+			</article>
+		</section>
+
+		<nav class="state-navigation" aria-label="Browse state briefs"><a id="previous-state" href="#">← Previous state</a><span id="state-position">State 1 of 37</span><a id="next-state" href="#">Next state →</a></nav>
+		<footer class="detail-footer"><span><strong>NEMA</strong> · National flood dashboard</span><a href="../index.html">Return to national overview ↑</a></footer>
+	</main>
+</body>
+</html>
